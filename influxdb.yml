@@ -1,0 +1,6 @@
+INFLUX_DB:
+    HOST: "192.168.0.20"
+    PORT: "8087"
+    USERNAME: admin
+    PASSWORD: admin
+    DATABASE: mitemp
