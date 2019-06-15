@@ -1,5 +1,7 @@
 from influxdb import InfluxDBClient
-import json, argparse, os, yaml
+import json, argparse, os
+import configparser
+#import pyyaml
 
 def main():
 
@@ -10,7 +12,10 @@ def main():
 
     SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
     config_file = SCRIPT_PATH + "/" + args.influxdb_yml 
-    conf = yaml.load(stream=open(config_file).read(), Loader=yaml.SafeLoader)
+    
+    conf = configparser.ConfigParser()
+    conf.read(config_file)
+#    conf = yaml.load(stream=open(config_file).read(), Loader=yaml.SafeLoader)
 
     points = []
     for data_file in os.listdir(args.data_dir):
