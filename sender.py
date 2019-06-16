@@ -10,8 +10,7 @@ def main():
     parser.add_argument('influxdb_yml', help='YAML file of configurations for InfluxDB')
     args = parser.parse_args()
 
-    SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
-    config_file = SCRIPT_PATH + "/" + args.influxdb_yml 
+    config_file = args.influxdb_yml 
     
     conf = configparser.ConfigParser()
     conf.read(config_file)
@@ -23,9 +22,7 @@ def main():
             data_list = json.load(f)
             for data in data_list:
                 point = {}
-                point["measurement"] = "mitemp"
-                point["tags"] = {}
-                point["tags"]["mac"] = data["mac"]
+                point["measurement"] = data["mac"]
                 point["time"] = data["time"]
                 point["fields"] = {}
                 point["fields"]["temperature"] = data["temperature"]
